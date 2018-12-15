@@ -6,13 +6,17 @@ import engine.NotebookForm;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Test;
+// import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import java.util.List;
 import static com.codeborne.selenide.Selenide.open;
 import static engine.Utils.browserMaximize;
@@ -30,11 +34,11 @@ public class ShopByTest {
      *
      */
 
-    @Before
+    @BeforeMethod
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", PATH_TO_CHROMEDRIVER_EXE);
         Configuration.browser = "chrome";
-        Configuration.timeout = 3000;
+        Configuration.timeout = 5000;
         ChromeOptions options = new ChromeOptions();
         options.setBinary(CHROME_BINARY);
 
@@ -47,7 +51,7 @@ public class ShopByTest {
     /**
      * Open shop.by and verify
      */
-    @Test
+     @Test
     public void shopBySearchTest() throws InterruptedException {
 
         //Step 1
@@ -134,7 +138,7 @@ public class ShopByTest {
         screenshot("Check_item_NameAndPrice_same");
     }
 
-    @After
+    @AfterMethod
     public void tearDown() {
         WebDriverRunner.getWebDriver().quit();
     }
